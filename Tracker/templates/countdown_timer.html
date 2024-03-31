@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% block title %}Countdown Timer{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .timer-container {
+            text-align: center;
+            margin-top: 80px; /* Added margin for better spacing */
+        }
+
+        .title{
+            margin-left: 450px;
+            font-size: ;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        .running-icon {
+            font-size: 24px;
+            margin-right: 5px;
+            color: #28a745;
+        }
+
+        .paused-icon {
+            color: #ff0000; /* Change to the desired color for paused state */
+        }
+
+        input {
+            border-radius: 20px;
+            width: 150px;
+        }
+
+        .button-container {
+            margin-top: 400px;
+            margin-left: 550px;
+            display: flex;
+            gap: 50px;
+        }
+        
+
+        .container{
+            width: 400px;
+            height: 90px;
+            position: absolute;
+            top: 250px;
+            right: 450px;
+        }
+
+        .container::before{
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: red;
+            border-radius: 5px;
+            position: absolute;
+            left: -40px;
+            top: -40px;
+        }
+
+        .container::after{
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: blue;
+            border-radius: 50%;
+            position: absolute;
+            right: -40px;
+            bottom: -50px;
+
+        }
+
+        .countdown{
+            width: 100%;
+            height: 100%;
+            background: orangered;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(40px);
+        }
+
+        .countdown span{
+            font-size: 25px;
+            width: 70px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
+        @media screen and (max-width: 768px) {
+            .button-container {
+                margin-top: 400px;
+                margin-left: 50px;
+                display: flex;
+                gap: 50px;
+            }
+
+            .title {
+                margin: auto auto;
+                margin-top: 200px;
+            }
+
+            .container {
+                width: 300px;
+                height: 90px;
+                position: absolute;
+                top: 500px;
+                right: 40px;
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+<h2 class="title">Get Ready To Focus</h2>
+<div class="timer-container">
+    <label for="hours">Hours:</label>
+    <input type="number" id="hours" placeholder="Enter hours" min="0">
+    
+    <label for="minutes">Minutes:</label>
+    <input type="number" id="minutes" placeholder="Enter minutes" min="0">
+    
+    <label for="seconds">Seconds:</label>
+    <input type="number" id="seconds" placeholder="Enter seconds" min="0">
+    
+   
+
+    <div class="container">
+        <div class="countdown" id="countdown">
+            <span id="timer-icon" class="paused-icon"><i class="fas fa-running"></i></span>
+            <span id="hrs">00</span>:<span id="min">00</span>:<span id="sec">00</span>
+        </div>
+    </div>
+</div>
+<div class="button-container">
+    <button onclick="togglePauseResume()"><i class="fa fa-play" aria-hidden="true"></i> /  <i class="fa fa-pause" aria-hidden="true"></i>
+    </button>
+    <button onclick="resetTimer()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+    <button onclick="startTimer()">Start Session</button>
+</div>
+<script >
+let timer;
+let totalTimeInSeconds;
+let isPaused = false;
+
+function startTimer() {
+    let hours = parseInt(document.getElementById("hours").value) || 0;
+    let minutes = parseInt(document.getElementById("minutes").value) || 0;
+    let seconds = parseInt(document.getElementById("seconds").value) || 0;
+
+    totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
+
+    if (totalTimeInSeconds <= 0) {
+        alert("Please enter a valid time.");
+        return;
+    }
+
+    clearInterval(timer);
+
+    timer = setInterval(updateTimer, 1000);
+
+    // Change the icon to running state
+    document.getElementById("timer-icon").classList.remove("paused-icon");
+}
+
+function updateTimer() {
+    if (totalTimeInSeconds <= 0) {
+        clearInterval(timer);
+        // Change the icon to stopped state when the timer reaches 0
+        document.getElementById("timer-icon").classList.add("paused-icon");
+        alert("Timer has ended!");
+    } else {
+        if (!isPaused) {
+            let hrs = Math.floor(totalTimeInSeconds / 3600);
+            let mins = Math.floor((totalTimeInSeconds % 3600) / 60);
+            let secs = totalTimeInSeconds % 60;
+
+            document.getElementById("hrs").innerText = (hrs < 10 ? "0" : "") + hrs;
+            document.getElementById("min").innerText = (mins < 10 ? "0" : "") + mins;
+            document.getElementById("sec").innerText = (secs < 10 ? "0" : "") + secs;
+
+            totalTimeInSeconds--;
+        }
+    }
+}
+
+function togglePauseResume() {
+    isPaused = !isPaused;
+
+    if (isPaused) {
+        clearInterval(timer);
+        // Change the icon to paused state
+        document.getElementById("timer-icon").classList.add("paused-icon");
+    } else {
+        timer = setInterval(updateTimer, 1000);
+        // Change the icon to running state
+        document.getElementById("timer-icon").classList.remove("paused-icon");
+    }
+}
+
+function resetTimer() {
+    clearInterval(timer);
+    document.getElementById("hrs").innerText = "00";
+    document.getElementById("min").innerText = "00";
+    document.getElementById("sec").innerText = "00";
+    document.getElementById("hours").value = "";
+    document.getElementById("minutes").value = "";
+    document.getElementById("seconds").value = "";
+    totalTimeInSeconds = 0;
+    isPaused = false;
+    // Change the icon to stopped state
+    document.getElementById("timer-icon").classList.add("paused-iconn");
+}
+
+</script>
+
+{% endblock %}
+</body>
+</html>
+
+ <a href="{% url 'home' %}">Home</a>
+ <a href="{% url 'notepad' %}">Journal</a>
+ <a href="{% url 'goal-list' %}">Goals</a>
+ <a href="{% url 'img2pdf' %}">Image2pdf</a>
+ <a href="{% url 'timetable-event' %}">Calendar</a>
+ <a href="{% url 'countdown_timer' %}">Timer</a>
+</nav>

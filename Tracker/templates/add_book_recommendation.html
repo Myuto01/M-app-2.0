@@ -1,0 +1,79 @@
+<!-- edit_book_recommendation.html -->
+{% extends 'base.html' %}
+{% block title %}M| Add Book Recommendation{% endblock %}
+{% block content %}
+<head>
+    <style>
+         label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .description-label{
+        margin-left: 350px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+    }
+
+    .description-container{
+        margin-left: 350px;
+    }
+
+    .category-container{
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        margin-left: 30px;
+    }
+
+    .btn{
+        background: orangered;
+        width: 200px;
+        height: auto;
+        color: white;
+        margin-left: 550px;
+    }
+
+    .btn:hover{
+        background: blue;
+        color: white;
+    }
+    </style>
+    
+</head>
+    <h1>Add Book Recommendation</h1>
+    <form method="post" action="{% url 'add-book-recommendation' %}">
+        {% csrf_token %}
+        <div class="container">
+            <label for="title">Title: {{ form.title }}</label>
+            
+       
+            <label for="author">Author: {{ form.author }}</label>
+           
+        </div>
+
+        <br><br>
+
+        <label for="description" class="description-label">Description</label>
+        <div class="description-container">
+           {{ form.description }}
+        </div>
+
+        <br><br>
+
+        <div class="category-container">
+            <label for="amazon_url">Book Url:  {{ form.amazon_url }}</label>
+           
+
+            <label for="category">Category: {{ form.category }}</label>
+            
+        </div>
+
+        <button type="submit" class="btn">Add Book</button>
+    </form>
+ 
+{% endblock %}

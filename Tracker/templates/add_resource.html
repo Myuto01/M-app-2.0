@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+{% block title %}Edit Resource{% endblock %}
+{% block content %}
+<head>
+    <style>
+         label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .title-container{
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        margin-left: 110px;
+    }
+
+    .description-label{
+        margin-left: 350px;
+    }
+
+    .description-container{
+        margin-left: 350px;
+    }
+
+    .url-container{
+        margin-left: 420px;
+    }
+
+    .btn{
+        background: orangered;
+        width: 200px;
+        height: auto;
+        color: white;
+        margin-left: 550px;
+    }
+
+    .btn:hover{
+        background: blue;
+        color: white;
+    }
+    </style>
+</head>
+    <h1>Edit Resource</h1>
+    <form method="post" action="{% url 'add-resource' %}">
+        {% csrf_token %}
+        <div class="title-container">
+            <label for="title">Title: {{ form.title }}</label>
+            
+
+            <label for="category">Category:   {{ form.category }}</label>
+          
+        </div>
+
+
+        <label for="description" class="description-label">Description</label>
+        <div class="description-container">
+           {{ form.description }}
+        </div>
+
+        <div class="url-container">
+          <label for="url">Url {{ form.url }}</label>
+        </div>
+
+
+
+        <button type="submit" class="btn">Add Resource</button>
+    </form>
+{% endblock %}

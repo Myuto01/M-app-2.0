@@ -1,0 +1,206 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body{
+    height: 100vh;
+    background: orange !important;
+    overflow: auto !important;
+  }
+  nav{
+    position: absolute;
+    top: 20px;
+    right: 0;
+    width: 80px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+  }
+  nav .nav-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-45deg);
+  }
+  .nav-content .toggle-btn,
+  .nav-content span a{
+    height: 60px;
+    width: 60px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  }
+  .nav-content .toggle-btn{
+    font-size: 35px;
+    color: #0e2431;
+    z-index: 100;
+    cursor: pointer;
+    transform: rotate(-225deg);
+    transition: all 0.6s ease;
+  }
+  nav.open .toggle-btn{
+    transform: rotate(0deg);
+  }
+  .nav-content span{
+    position: absolute;
+    transition: all 0.6s ease;
+    opacity: 0;
+  }
+  nav.open .nav-content span{
+    transform: rotate(calc(var(--i) * (360deg/8))) translateY(120px);
+    opacity: 1;
+  }
+  .nav-content span a{
+    text-decoration: none;
+    transform: rotate(45deg);
+  }
+  .nav-content span a i{
+    font-size: 24px;
+    color: #0e2431;
+    transform: rotate(calc(var(--i) * (360deg/ -8)));
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+  .nav-content span a:hover i{
+    opacity: 1;
+  }
+ 
+
+/* ===== Month CSS =====*/
+.clock-container {
+    position: fixed;
+    margin-top: 80px;
+    top: 10px;
+    right: 10px;
+    font-size: 50px;
+    color: #333;
+}
+
+.month-calendar {
+    max-width: 600px;
+    position: relative;
+    top: 300px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.month {
+    text-align: center;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.month:hover {
+    background-color: #0056b3;
+}
+
+/* ===== Add Habit CSS =====*/
+
+.habit-form-container {
+    position: relative;
+    top: 100px;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    color: #333;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* ===== Habit List =====  */
+
+.habit-list-container {
+    position: relative;
+    max-width: 500px;
+    top: 100px;
+    margin-left: 10px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Note Pad */
+
+.notepad {
+  border: 1px solid #ccc !important;
+  padding: 20px !important;
+  width: 80% !important;
+  margin: 0 auto !important;
+}
+.date {
+  font-size: 14px !important;
+  color: #666 !important;
+  margin-bottom: 10px !important;
+}
+.notepad-form {
+  width: 100% !important;
+}
+
+.button{
+  background-color: #333;
+}

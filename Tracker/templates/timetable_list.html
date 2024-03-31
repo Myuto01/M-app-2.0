@@ -1,0 +1,83 @@
+<!-- timetable_list.html -->
+{% extends 'base.html' %}
+{% block title %}Timetable List{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table List </title>
+<style>
+    /* Add the following styles to your CSS file or inline styles in HTML templates */
+
+/* Styles for Timetable List */
+.timetable-list {
+    margin: 20px;
+}
+
+.timetable-event {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Styles for Timetable Event Form */
+.timetable-form {
+    max-width: 400px;
+    margin: 20px;
+}
+
+.timetable-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timetable-form input,
+.timetable-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.timetable-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.timetable-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .timetable-form {
+        max-width: 100%;
+    }
+}
+
+/* Additional Styles as Needed */
+
+</style>
+</head>
+<body>
+
+    <div class="timetable-list">
+        {% for event in events %}
+            <div class="timetable-event">
+                <h3>{{ event.title }}</h3>
+                <p>{{ event.description }}</p>
+                <p>Day: {{ event.day_of_week }}, Time: {{ event.start_time }} - {{ event.end_time }}</p>
+                <a href="{% url 'delete-timetable-event' event_id=event.id %}" ><button type="button" class="btn-danger">Delete</button></a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+</body>
+</html>

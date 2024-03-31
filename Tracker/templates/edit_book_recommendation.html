@@ -1,0 +1,145 @@
+<!-- edit_book_recommendation.html -->
+{% extends 'base.html' %}
+{% block title %}Edit Book Recommendation{% endblock %}
+{% block content %}
+<head>
+    <style>
+         label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .description-label{
+        margin-left: 350px;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+    }
+
+    .description-container{
+        margin-left: 350px;
+    }
+
+    .category-container{
+        display: flex;
+        flex-direction: row;
+        gap: 100px;
+        margin-left: 30px;
+    }
+
+    .btn{
+        background: orangered;
+        width: 200px;
+        height: auto;
+        color: white;
+        margin-left: 550px;
+    }
+
+    .btn:hover{
+        background: blue;
+        color: white;
+    }
+
+    .btn-container{
+        margin-top: 20px;
+        left: 490px;
+        position: relative;
+    }
+
+
+    .save-button{
+        width: 150px;
+        border-radius: 10px;
+        background-color: orangered;
+    }
+
+    .cancel-button{
+        width: 150px;
+        border-radius: 10px;
+        background-color: orangered;
+    }
+
+    .title-input {
+        width: 400px;
+    }
+
+    .description-input {
+            width: 600px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .title-input {
+            width: 200px;
+        }
+
+        .description-label {
+            margin-left: 10px;
+        }
+
+        .description-container {
+            margin-left: 10px;
+        }
+
+        .description-input {
+            width: 350px;
+        }
+
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 10px;
+        }
+
+        .book-recommendations-form {
+            margin-top: 150px;
+        }
+    }
+    </style>
+    
+</head>
+    <h1>Edit Book Recommendation</h1>
+<div class="book-recommendations-form">
+    <form method="post" action="{% url 'edit-book-recommendation' book.id %}">
+        {% csrf_token %}
+        <div class="container">
+            <label for="title">Title: {{ form.title }}</label>
+            
+       
+            <label for="author">Author: {{ form.author }}</label>
+           
+        </div>
+
+        <br><br>
+
+        <label for="description" class="description-label">Description</label>
+        <div class="description-container">
+           {{ form.description }}
+        </div>
+
+        <br><br>
+
+        <div class="category-container">
+            <label for="amazon_url">Book Url:  {{ form.amazon_url }}</label>
+           
+
+            <label for="category">Category: {{ form.category }}</label>
+            
+        </div>
+
+        <div class="btn-container">
+            <button type="submit" class="save-button"><i class="fa fa-check" aria-hidden="true"></i></button>
+            <a href="{% url 'book-recommendations'  %}"><button type="button" class="cancel-button"><i class="fa fa-times" aria-hidden="true"></i></button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

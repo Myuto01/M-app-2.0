@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Create a New Goal{% endblock %}
+{% block content %}
+<style>
+    .container{
+        display: flex;
+        margin: auto auto;
+        margin-top: 20px;
+        flex-direction: row;
+        gap: 280px; /* Adjust the value to set the desired space between elements */
+        
+    }
+
+    .title-form {
+            width: 500px;
+        }
+
+    .back {
+    position: relative;
+    margin-top: 0;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: orangered;
+    }
+
+    .save-btn{
+        width: 90px;
+        margin-top: 10px;
+        margin-left: 45%;
+        border-radius: 8px;
+        background-color: orangered;
+    }
+
+    label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    .description{
+        margin-left: 350px;
+    }
+
+    .description-label{
+        margin-left: 350px;
+    }
+
+    .description-form {
+            width: 600px;
+        }
+
+    @media screen and (max-width: 768px) {
+        .container {
+            margin-left: 0;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .title-form {
+            margin-left: 0;
+            width: 300px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 100px;
+        }
+        .description-label {
+            margin-left: 10px;
+        }
+        .description {
+            margin-left: 0;
+            margin: auto auto;
+        }
+        .description-form {
+            margin-left: 0;
+            width: 300px;
+        }
+        .save-btn {
+        width: 90px;
+        margin-top: 10px;
+        margin: auto auto;
+        border-radius: 8px;
+        background-color: orangered;
+    }
+        
+    }
+    
+</style>
+<!--<a href="{% url 'goal-list' %}"><button type="button" class="back"><i class="fa-solid fa-arrow-left"></i></button></a>-->
+
+    <h1>Create a New Goal</h1>
+    <form method="post" action="{% url 'create-goal' %}">
+        {% csrf_token %}
+    <div class="container">
+        <p><span class="label">Title:</span> {{ form.title}}</p>
+
+        
+        <p><span class="label">Target Date: </span>{{ form.target_date}}</p>
+        
+    </div>
+        <label class="description-label">Description</label>
+        <div class="description">
+           {{ form.description}}
+        </div>
+    
+        
+        <button type="submit" class="save-btn">Save Goal</button>
+    </form>
+
+{% endblock %}

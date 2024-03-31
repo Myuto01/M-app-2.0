@@ -1,0 +1,105 @@
+<!-- goal_detail.html -->
+{% extends 'base.html' %}
+{% block title %}Goal Detail{% endblock %}
+{% block content %}
+<style>
+    .title{
+        text-align: center;
+        font-weight: bold;
+        font-size: 45px;
+    }
+
+    .description{
+        
+        margin-left: 10px;
+    }
+
+    .goal-container{
+        background-color: #fff; /* Set white background color */
+        padding: 20px; /* Adjust padding as needed */
+        width: 800px;
+        height: auto;
+        margin-top: 30px;
+        margin-left: 300px;
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a card-like effect */
+    }
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        gap: 40%;
+    }
+
+    button {
+    position: relative;
+    margin-top: 0;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: orangered;
+    }
+
+
+    .mark-achieved{
+        position: relative;
+        margin-top: 10px;
+        margin-left: 45%;
+        width: 150px;
+        height: 50px;
+        font-size: 15px;
+        border-radius: 10px;
+        background-color: orangered;
+    }
+    .streak-counter {
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 39%;
+    }
+</style>
+
+<a href="{% url 'goal-list' %}"><button type="button"><i class="fa-solid fa-arrow-left"></i></button></a>
+<h1 class="title">{{ goal.title }}</h1>
+
+<div class="goal-container">
+    <div class="container">
+        <label class="label-date"><b>Target Date:</b> {{ goal.target_date }}</label>
+        
+        <label class="label-status"><b>Status:</b> {% if goal.is_achieved %}Achieved{% else %}Not Achieved{% endif %}
+        </label>
+    </div>
+     <!-- Streak Counter -->
+     <div class="streak-counter" id="streak-counter"></div>
+    <br><br>
+    <label><b>Description:</b></label>
+    <p class="description"> {{ goal.description }}</p>
+</div>
+
+{% if not goal.is_achieved %}
+    <form method="post" action="{% url 'goal-detail' goal_id=goal.id %}">
+        {% csrf_token %}
+        <button class="mark-achieved" type="submit" name="mark_achieved">Mark as Achieved</button>
+    </form>
+{% endif %}
+
+<script>
+    function updateStreakCounter() {
+        var targetDate = new Date("{{ goal.target_date }}");
+        var currentDate = new Date();
+        var daysLeft = Math.ceil((targetDate - currentDate) / (1000 * 60 * 60 * 24));
+
+        var streakCounter = document.getElementById('streak-counter');
+        streakCounter.innerText = 'Days left: ' + daysLeft;
+    }
+
+    // Update the counter every second (adjust the interval as needed)
+    setInterval(updateStreakCounter, 1000);
+
+    // Initial update on page load
+    updateStreakCounter();
+</script>
+
+{% endblock %}

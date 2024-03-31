@@ -1,0 +1,75 @@
+<!-- add_timetable_event.html and edit_timetable_event.html -->
+{% extends 'base.html' %}
+{% block title %}Add Timetable Event{% endblock %}
+{% block content %}
+<head>
+    <style>
+        /* Add the following styles to your CSS file or inline styles in HTML templates */
+
+/* Styles for Timetable List */
+.timetable-list {
+    margin: 20px;
+}
+
+.timetable-event {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Styles for Timetable Event Form */
+.timetable-form {
+    max-width: 400px;
+    margin: 20px;
+}
+
+.timetable-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timetable-form input,
+.timetable-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.timetable-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.timetable-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .timetable-form {
+        max-width: 100%;
+    }
+}
+
+/* Additional Styles as Needed */
+
+    </style>
+</head>
+<body>
+
+    <div class="timetable-form">
+        <form method="post" action="{% url 'add-timetable-event' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Event</button>
+        </form>
+    </div>
+{% endblock %}
+
+</body>
+</html>

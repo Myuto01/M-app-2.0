@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block title %}Edit Goal{% endblock %}
+{% block content %}
+<style>
+    .container{
+        display: flex;
+        margin-left: 150px;
+        margin-top: 20px;
+        flex-direction: row;
+        gap: 280px; /* Adjust the value to set the desired space between elements */
+        
+    }
+
+    .back {
+    position: relative;
+    margin-top: 0;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: orangered;
+    }
+
+    .save-btn{
+        width: 90px;
+        margin-top: 10px;
+        margin-left: 45%;
+        border-radius: 8px;
+        background-color: orangered;
+    }
+
+    label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .label{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    
+    .description{
+        margin-left: 350px;
+    }
+
+    .description-label{
+        margin-left: 350px;
+    }
+
+    .btn-container{
+        margin-top: 20px;
+        left: 490px;
+        position: relative;
+    }
+
+    .save-button{
+        width: 150px;
+        border-radius: 10px;
+        background-color: orangered;
+    }
+
+    .cancel-button{
+        width: 150px;
+        border-radius: 10px;
+        background-color: orangered;
+    }
+
+    .title-input{
+        width: 400px;
+    }
+
+    .description-input {
+        width: 600px;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .edit-goal-container {
+            margin-top: 150px;
+        }
+        
+        .container {
+                display: flex;
+                margin-left: 0;
+                margin-top: 20px;
+                flex-direction: column;
+                gap: 10px;
+        }
+
+        .description-label {
+            margin-left: 10px;
+        }
+
+        .description {
+            margin-left: 10px;
+        }
+
+        .title-input{
+            width: 200px;
+        }
+
+        .description-input {
+            width: 350px;
+        }
+        
+        .btn-container {
+            margin-top: 20px;
+            left: 10px;
+            position: relative;
+        }
+
+        
+    }
+</style>
+<!--<a href="{% url 'goal-list' %}"><button type="button" class="back"><i class="fa-solid fa-arrow-left"></i></button></a>-->
+
+    <h1>Edit Goal</h1>
+    <div class="edit-goal-container">
+    <form method="post" action="{% url 'edit-goal' goal.id %}">
+        {% csrf_token %}
+    <div class="container">
+        <p><span class="label">Title:</span> {{ form.title}}</p>
+
+        
+        <p><span class="label">Target Date: </span>{{ form.target_date}}</p>
+        
+    </div>
+        <label class="description-label">Description</label>
+        <div class="description">
+           {{ form.description}}
+        </div>
+    
+        
+        <div class="btn-container">
+            <button type="submit" class="save-button"><i class="fa fa-check" aria-hidden="true"></i></button>
+            <a href="{% url 'goal-list'  %}"><button type="button" class="cancel-button"><i class="fa fa-times" aria-hidden="true"></i></button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

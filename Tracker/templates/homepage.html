@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}M |Home-Page{% endblock %}
+{% block content %}
+<head>
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <style type="text/css">
+
+        .day {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            color: black; /* Turquoise color for a futuristic feel */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .watch-container {
+            width: 400px;
+            height: 90px;
+            position: absolute;
+            top: 100px;
+            right: 100px;
+        }
+
+        .clock{
+            width: 100%;
+            height: 100%;
+            background: orangered;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(40px);
+        }
+
+        .watch-container::before{
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: red;
+            border-radius: 5px;
+            position: absolute;
+            left: -40px;
+            top: -40px;
+        }
+
+        .watch-container::after{
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: blue;
+            border-radius: 50%;
+            position: absolute;
+            right: -40px;
+            bottom: -70px;
+
+        }
+
+        .clock span{
+            font-size: 22px;
+            width: 90px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
+        .clock span::after{
+            font-size: 12px;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #hrs::after{
+            content: 'HOURS';
+           
+        }
+
+        #min::after{
+            content: 'MINUTES';
+            
+        }
+
+        #sec::after{
+            content: 'SECONDS';
+          
+        }
+        .name{
+            position: absolute;
+            top: 65px;
+            left: 20%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            color: black; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .icon-wrapper {
+            background-color: #fff;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            margin-bottom: 40px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            color: #000; /* Black color for the icon */
+            font-size: 50px;
+        }
+
+        .flex-container .flex-box .link-button {
+            border-radius: 20px;
+            background-color: orangered;
+            width: 100%;
+            height: 100%;
+            margin-top: 0;
+            margin-left: 0;
+        }
+        .flex-container {
+            width: 70%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 190px;
+            margin-left: 200px;
+            justify-content: space-around;
+        }
+
+        .flex-box {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(orange, rgb(255, 81, 0));
+            border-radius: 50%;
+            color: white;
+            margin-left: 10px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            text-align: center; /* Center the text inside the button */
+        }
+
+        @media screen and (max-width: 768px) {
+            .watch-container {
+                width: 300px;
+                height: 90px;
+                position: absolute;
+                top: 180px;
+                /* margin: auto auto; */
+                left: 50px;
+            }
+            .clock-container {
+                margin-top: 0;
+                right: 30px;
+                background-color: #fff;
+                height: 65px;
+                width: 30%;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .name {
+                position: absolute;
+                top: 300px;
+                left: 40%;
+                transform: translateX(-50%);
+                font-size: 23px;
+                font-weight: bold;
+                color: black;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            .day {
+                left: 95px;
+                position: relative;
+            }
+
+            .flex-container {
+                width: 70%;
+                height: auto;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-top: 400px;
+                margin-left: 70px;
+                justify-content: space-around;
+            }
+
+            .flex-box {
+                width: 48%; /* Two boxes per row on smaller screens */
+                height: 150px;
+                margin-left: 0;
+                display: flex   ;
+                margin-bottom: 10px;
+               
+            }
+
+            .icon-wrapper {
+                background-color: #fff;
+                border-radius: 50%;
+                width: 70px;
+                height: 70px;
+                display: flex;
+                margin-bottom: 40px;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .flex-container .flex-box .link-button {
+                border-radius: 20px;
+                background-color: orangered;
+                margin-top: 0;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="watch-container">
+    <div class="clock">
+        <span id="hrs">00</span>
+        <span>:</span>
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+    </div>
+</div>
+<h2 class="name">Hello,  Mr Mwango</h2>
+<div class="flex-container">
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-check-circle"></i>
+            </div>
+        </div>
+        <a href="{% url 'habit-list' %}"><button type="button" class="link-button">Habit Tracker</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-pen"></i>
+            </div>
+        </div>
+        <a href="{% url 'notepad' %}"><button type="button" class="link-button">Journal</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-link"></i>
+            </div>
+        </div>
+        <a href="{% url 'resources' %}"><button type="button" class="link-button">Resources</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-focus-target"></i>
+            </div>
+        </div>
+        <a href="{% url 'goal-list' %}"><button type="button" class="link-button">Goals</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-file-alt"></i>
+            </div>
+        </div>
+        <a href="{% url 'notes' %}"><button type="button" class="link-button">View Notes</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-plus-circle"></i>
+            </div>
+        </div>
+        <a href="{% url 'create-goal' %}"><button type="button" class="link-button">Add Goal</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-book"></i>
+            </div>
+        </div>
+        <a href="{% url 'book-recommendations' %}"><button type="button" class="link-button">Read Book</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="fa-solid fa-spa"></i>
+            </div>
+        </div>
+        <a href="{% url 'guided-exercises' %}"><button type="button" class="link-button">Meditation</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-calendar-alt"></i>
+            </div>
+        </div>
+        <a href="{% url 'timetable-event' %}"><button type="button" class="link-button">Calendar</button></a>
+    </div>
+    <div class="flex-box">
+        <div class="icon-wrapper">
+            <div class="icon">
+                <i class="uil uil-hourglass"></i>
+            </div>
+        </div>
+        <a href="{% url 'countdown_timer'%}"><button type="button" class="link-button">Timer</button></a>
+    </div>
+</div>
+</body>
+<script>
+    // ===== Clock Display =====
+    let hrs = document.getElementById("hrs");
+    let min = document.getElementById("min");
+    let sec = document.getElementById("sec");
+    
+    setInterval(() => {
+        let currentTime = new Date();
+
+        hrs.innerHTML = (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
+        min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+        sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+
+    }, 1000);
+</script>
+
+
+{% endblock %}
+</html>

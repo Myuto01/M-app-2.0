@@ -1,0 +1,59 @@
+<!-- edit_meditation_exercise.html -->
+{% extends 'base.html' %}
+{% block title %}M | Img2pdf Converter{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    <style>
+        .img2pdf-container {
+            margin-top: 170px;
+        }
+
+        .convert-button {
+            background: orangered;
+            border-radius: 20px;
+            margin: auto auto;
+            width: 50%;
+            margin-top: 10px;
+        }
+
+        .image-label {
+            font-weight: bold;
+            text-align: center;
+            font-size: 30px;
+        }
+        
+        
+
+    </style>
+</head>
+<body>
+
+    <h1>Image to PDF Converter</h1>
+<div class="img2pdf-container">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="image" class="image-label">Insert image to convert</label>
+        <div class="image-form">{{ form.image }}</div>
+        <button type="submit" class="convert-button">Convert to PDF</button>
+    </form>
+
+    {% if form.is_bound and form.is_valid %}
+        <p><a href="{{ form.instance.image.url }}.pdf" download>Download PDF</a></p>
+    {% endif %}
+</div>
+</body>
+{% endblock %}
+</html>

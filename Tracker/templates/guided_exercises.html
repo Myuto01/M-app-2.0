@@ -1,0 +1,117 @@
+<!-- guided_exercises.html -->
+{% extends 'base.html' %}
+{% block title %}Guided Exercises{% endblock %}
+{% block content %}
+<head>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+    .card {
+        display: flex;
+        align-items: center;
+        width: 500px; /* Adjust the width as needed */
+        margin: 20px auto; /* Center the card */
+        padding: 20px;
+        margin-left: 430px;
+        background-color: #ffffff; /* White background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a card-like effect */
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+    }
+        
+    ul {
+    list-style-type: none;
+    padding: 0;
+    }
+
+    ul li {
+    margin-bottom: 10px;
+    }
+
+    .edit-button{
+        
+        border-radius: 50%;
+        width:50px;
+        height: 50px;
+        background-color: orangered;
+    }
+
+    .add-button{
+        margin-left: 90%;
+        margin-top: 20%;
+        border-radius: 50%;
+        width:50px;
+        height: 50px;
+        background-color: orangered;
+    }
+
+    .btn-container{
+        display: flex;;
+        flex-direction: row;
+        margin-left: 350px;
+        gap: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .add-button {
+            margin-left: 80%;
+            margin-top: 20%;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: orangered;
+        }
+        
+        .card {
+            display: flex;
+            align-items: center;
+            width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            margin-top: 20px;
+            margin-left: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .btn-container {
+        display: flex;
+        flex-direction: row;
+        margin-left: 0; 
+        gap: 10px;
+    }
+    }
+</style>
+</head>
+    <h1>Guided Exercises</h1>
+    <a href="{% url 'add-meditation-exercise' %}"><button type="button" class="add-button"><i class="fa-solid fa-plus" style="color: black;"></i></button> </a>
+    <ul>
+        {% for exercise in exercises_list %}
+        <div class="card">
+            <li>
+                
+               
+                <strong>{{ exercise.title }}</strong><br>
+                {{ exercise.description }}<br>
+                {% if exercise.content %}
+                    {% if exercise.category == 'audio' %}
+                        <audio controls>
+                            <source src="{{ exercise.content }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% elif exercise.category == 'script' %}
+                        <pre>{{ exercise.content }}</pre>
+                    {% endif %}
+                {% endif %}
+                
+            </li>
+            <div class="btn-container">
+                <a href="{% url 'edit-meditation-exercise' exercise.id %}"><button type="button" class="edit-button"><i class="fas fa-edit" style="color: black;"></i></button> </a>
+                <a href="{% url 'delete-meditation-exercise' exercise.id %}"><button type="button" class="edit-button"><i class="fas fa-trash" style="color: red;"></i></button> </a>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+    
+  
+{% endblock %}

@@ -1,0 +1,128 @@
+<!-- resources.html -->
+{% extends 'base.html' %}
+{% block title %}Educational Resources{% endblock %}
+{% block content %}
+<head>
+    <style>
+           .card {
+        display: flex;
+        align-items: center;
+        width: 500px; /* Adjust the width as needed */
+        margin: 20px auto; /* Center the card */
+        padding: 20px;
+        margin-left: 430px;
+        background-color: #ffffff; /* White background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for a card-like effect */
+        border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+    }
+        
+    ul {
+    list-style-type: none;
+    padding: 0;
+    }
+
+    ul li {
+    margin-bottom: 10px;
+    }
+    a{
+        text-decoration: none;
+    }
+
+    .edit-button{
+        
+        border-radius: 50%;
+        width:50px;
+        height: 50px;
+        background-color: orangered;
+    }
+
+    .add-button{
+        margin-left: 90%;
+        margin-top: 20%;
+        border-radius: 50%;
+        width:50px;
+        height: 50px;
+        background-color: orangered;
+    }
+
+    .btn-container{
+        display: flex;;
+        flex-direction: row;
+        margin-left: 350px;
+        gap: 10px;
+    }
+
+    .add-btn{
+        position: relative;
+        margin-top: 0;
+        margin-left: 50px;
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+        border-radius: 50%;
+        background-color: orangered;
+    }
+
+   
+
+    @media screen and (max-width: 768px)  {
+
+        .card {
+            display: flex;
+            align-items: center;
+            top: 30px;
+            width: 350px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: auto auto;
+        }
+
+        .add-btn {
+            position: relative;
+            
+            margin-top: 90px;
+            margin-left: 60%;
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: orangered;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: row;
+            margin-left: 180px;
+            gap: 10px;
+        }
+
+        .edit-button {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            background-color: orangered;
+        }
+        
+    }
+
+    </style>
+</head>
+   <h1>Educational Resources</h1>
+   <a  href="{% url 'add-resource' %}"><button class="add-btn" type="button"><i class="fa-solid fa-plus"></i></button></a>
+ 
+        <ul>
+            {% for resource in resources_list %}
+            <div class="card">
+                <li><a href="{{ resource.url }}" target="_blank">{{ resource.title }}</a> - {{ resource.description }}</li>
+                <div class="btn-container">
+                    <a href="{% url 'edit-resource' resource.id %}"><button type="button" class="edit-button"><i class="fas fa-edit" style="color: black;"></i></button> </a>
+                    <a href="{% url 'delete-resource' resource.id %}"><button type="button" class="edit-button"><i class="fas fa-trash" style="color: red;"></i></button> </a>
+                </div>
+            </div>
+          
+            {% endfor %}
+        </ul>
+       
+{% endblock %}
