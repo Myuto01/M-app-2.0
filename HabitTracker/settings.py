@@ -22,15 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = os.environ.get("SECRET_KEY")
-SECRET_KEY = 'django-insecure-_85*ni$bo^39o3pd64x@&ho##&dgv^q)3+13g$9otm#m28wome'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#SECRET_KEY = 'django-insecure-_85*ni$bo^39o3pd64x@&ho##&dgv^q)3+13g$9otm#m28wome'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = FALSE
 
 ALLOWED_HOSTS = ["*"]
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,15 +80,10 @@ WSGI_APPLICATION = 'HabitTracker.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Database engine
-        'NAME': 'm_app_db',  # Database name
-        'USER': 'mydatabaseuser',  # Database username
-        'PASSWORD': 'bMHFOOVQct6abA56RC7SoWYY7f9bJnrf',  # Database password
-        'HOST': '127.0.0.1',  # Database hostname or IP address
-        'PORT': '5432',  # Database port (default for PostgreSQL)
-    }
-}
+    'default': dj_database_url.config(  
+              # Replace this value with your local database's connection string.        
+               default='postgres://m_app_db_user:bMHFOOVQct6abA56RC7SoWYY7f9bJnrf@dpg-co4lgn21hbls73buk8s0-a.singapore-postgres.render.com/m_app_db',       
+                conn_max_age=600    )}
 
 
 # Password validation
