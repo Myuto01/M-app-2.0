@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Goal List{% endblock %}
 {% block content %}
+<!--goal_list.html-->
 <style>
 .status-circle {
   width: 20px;
@@ -89,10 +90,10 @@ button {
 
 
 @media screen and (max-width: 768px){
-    .container {
-      flex-direction: column;
-      margin-top: 10px;
-  }
+  .container {
+        flex-direction: column;
+        margin-top: 142px;
+    }
 
   .card {
     display: flex;
@@ -124,6 +125,9 @@ button {
     font-size: 30px;
     border-radius: 50%;
     background-color: orangered;
+    position: fixed;
+    top: 400px;
+    left: 80px;
 }
 }
     

@@ -59,9 +59,31 @@
         margin-top: 10px;
         margin-left: 39%;
     }
+
+    @media (max-width: 780px) {
+        .goal-container {
+            background-color: #fff;
+            padding: 20px;
+            width: 377px;
+            margin: 20px;
+            height: auto;
+            margin-top: 30px;
+            margin-left: 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            right: 50px;
+        }
+
+
+    }
 </style>
 
-<a href="{% url 'goal-list' %}"><button type="button"><i class="fa-solid fa-arrow-left"></i></button></a>
 <h1 class="title">{{ goal.title }}</h1>
 
 <div class="goal-container">

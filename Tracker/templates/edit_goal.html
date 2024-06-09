@@ -106,8 +106,10 @@
         
         .btn-container {
             margin-top: 20px;
-            left: 10px;
+            left: 36px;
             position: relative;
+            width: fit-content;
+            margin-bottom: 60px;
         }
 
         
@@ -134,7 +136,7 @@
         
         <div class="btn-container">
             <button type="submit" class="save-button"><i class="fa fa-check" aria-hidden="true"></i></button>
-            <a href="{% url 'goal-list'  %}"><button type="button" class="cancel-button"><i class="fa fa-times" aria-hidden="true"></i></button></a>
+            <a href="{% url 'goal-list'  %}"><button style="background: red;" type="button" class="cancel-button"><i class="fa fa-times" aria-hidden="true"></i></button></a>
         </div>
     </form>
 </div>
