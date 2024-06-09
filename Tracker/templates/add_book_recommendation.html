@@ -42,6 +42,44 @@
         background: blue;
         color: white;
     }
+
+    @media screen and (max-width: 768px) {
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        .container .title{
+            position: relative;
+            top: 65px;
+        }
+
+        .description-container {
+            margin-left: 17px;
+        }
+
+        .description-label {
+            margin-left: 17px;
+        }
+
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-left: 15px;
+
+        }
+
+        .btn {
+            background: orangered;
+            width: 200px;
+            height: auto;
+            color: white;
+            margin-bottom: 40px;
+            margin-top: 25px;
+            margin-left: 92px;
+        }
+
+    }
     </style>
     
 </head>
@@ -49,16 +87,17 @@
     <form method="post" action="{% url 'add-book-recommendation' %}">
         {% csrf_token %}
         <div class="container">
-            <label for="title">Title: {{ form.title }}</label>
+            <label for="title" class="title">Title:<br> {{ form.title }}</label>
             
        
-            <label for="author">Author: {{ form.author }}</label>
+            <label for="author">Author:<br> {{ form.author }}</label>
            
         </div>
 
         <br><br>
 
-        <label for="description" class="description-label">Description</label>
+        <label for="description" class="description-label">Description</label><br>
+
         <div class="description-container">
            {{ form.description }}
         </div>
@@ -66,10 +105,10 @@
         <br><br>
 
         <div class="category-container">
-            <label for="amazon_url">Book Url:  {{ form.amazon_url }}</label>
+            <label for="amazon_url">Book Url:<br>  {{ form.amazon_url }}</label>
            
 
-            <label for="category">Category: {{ form.category }}</label>
+            <label for="category">Category:<br> {{ form.category }}</label>
             
         </div>
 

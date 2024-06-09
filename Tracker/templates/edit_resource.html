@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-{% block title %}Edit Resource{% endblock %}
+{% block title %}Edit Resource={% endblock %}
 {% block content %}
 <head>
     <style>
@@ -73,9 +73,9 @@
     @media screen and (max-width: 768px) {
         .title-container {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-left: 10px;
+            flex-direction: row;
+            gap: 100px;
+            margin-left: 15px;
         }
 
         .title-input{
@@ -122,7 +122,7 @@
     <form method="post" action="{% url 'edit-resource' resource.id %}">
         {% csrf_token %}
         <div class="title-container">
-            <label for="title">Title: {{ form.title }}</label>
+            <label for="title">Title: {{ form.title }}</label><br><br>
             
 
             <label for="category">Category:   {{ form.category }}</label>

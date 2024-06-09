@@ -74,7 +74,6 @@
         .container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
         }
 
         .title-input {
@@ -112,10 +111,10 @@
     <form method="post" action="{% url 'edit-book-recommendation' book.id %}">
         {% csrf_token %}
         <div class="container">
-            <label for="title">Title: {{ form.title }}</label>
+            <label for="title">Title:<br> {{ form.title }}</label>
             
        
-            <label for="author">Author: {{ form.author }}</label>
+            <label for="author">Author:<br> {{ form.author }}</label>
            
         </div>
 

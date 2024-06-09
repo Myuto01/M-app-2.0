@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-{% block title %}Edit Resource{% endblock %}
+{% block title %}Add Resource{% endblock %}
 {% block content %}
 <head>
     <style>
@@ -40,16 +40,59 @@
         background: blue;
         color: white;
     }
+
+    @media (max-width: 780px) {
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 15px;
+        }
+        .title{
+            position: relative;
+            top: 70px;
+        }
+
+        .description-container {
+            margin-left: 17px;
+        }
+
+        .description-label {
+            margin-left: 17px;
+            margin-bottom: 5px;
+        }
+
+        .url-container {
+            margin-left: 17px;
+        }
+
+        .btn {
+            background: orangered;
+            width: 200px;
+            height: auto;
+            color: white;
+            margin-left: 83px;
+            margin-top: 20px;
+            margin-bottom: 44px;
+        }
+
+        .url-container input{
+            width: 330px !important;
+        }
+    }
+
+
+
+    
     </style>
 </head>
-    <h1>Edit Resource</h1>
+    <h1>AddResource</h1>
     <form method="post" action="{% url 'add-resource' %}">
         {% csrf_token %}
         <div class="title-container">
-            <label for="title">Title: {{ form.title }}</label>
+            <label for="title" class="title">Title:<br> {{ form.title }}</label>
             
 
-            <label for="category">Category:   {{ form.category }}</label>
+            <label for="category">Category:<br>   {{ form.category }}</label>
           
         </div>
 
