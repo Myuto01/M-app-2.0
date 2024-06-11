@@ -1,5 +1,5 @@
 from django import forms
-from .models import Habit, NotepadEntry, Goal, Resource, BookRecommendation, MeditationExercise, Image
+from .models import Habit, NotepadEntry, Goal, Resource, BookRecommendation, MeditationExercise, Image, BlockedWebsite
 
 class HabitForm(forms.ModelForm):
     class Meta:
@@ -72,4 +72,9 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image 
         fields = ['image']
+
+class BlockedWebsiteForm(forms.ModelForm):
+    class Meta:
+        model = BlockedWebsite
+        fields = ['url']
 

@@ -83,4 +83,11 @@ class Events(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
 
+
+class BlockedWebsite(models.Model):
+    url = models.URLField(unique=True)
+
+    def __str__(self):
+        return self.url
+
     
