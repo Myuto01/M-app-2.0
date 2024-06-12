@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponse, JsonResponse
 from django.contrib import messages
 from django.conf import settings 
-from .models import Habit, NotepadEntry, Goal, Resource, BookRecommendation, MeditationExercise, Image, Events
-from .forms import HabitForm, NotepadForm, NotepadEditForm, GoalForm, ResourceForm, BookRecommendationForm, MeditationExerciseForm, ImageForm, GoalEditForm
+from .models import Habit, NotepadEntry, Goal, Resource, BookRecommendation, MeditationExercise, Image, Events, BlockedWebsite
+from .forms import HabitForm, NotepadForm, NotepadEditForm, GoalForm, ResourceForm, BookRecommendationForm, MeditationExerciseForm, ImageForm, GoalEditForm,  BlockedWebsiteForm
 from datetime import datetime
 import img2pdf
 from PIL import Image as PILImage
@@ -343,6 +343,27 @@ def remove(request):
 
 def countdown_timer(request):
     return render(request, 'countdown_timer.html')
+
+def block_website(request):
+    if request.method == 'POST':
+        form = BlockedWebsiteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('block_website')
+    else:
+        form = BlockedWebsiteForm()
+        blocked_websites = BlockedWebsite.objects.all()
+        context = {'form': form, 'blocked_websites': blocked_websites}
+    return render(request, 'blocker/block_website.html', context)
+
+def unblock_website(request, website_id):
+    website = BlockedWebsite.objects.get(pk=website_id)
+    website.delete()
+    return redirect('block_website')
+
+def blocked_websites_list(request):
+    blocked_websites = BlockedWebsite.objects.all()
+    return render(request, 'blocker/block_website.html', {'blocked_websites': blocked_websites})
 
 """
 #Time Table

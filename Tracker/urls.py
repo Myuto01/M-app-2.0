@@ -40,6 +40,12 @@ urlpatterns = [
   path('remove/', views.remove, name='remove'),
   path('countdown-timer/', views.countdown_timer, name='countdown_timer'),
 
+
+  #Blocked Websites
+  path('block-website/', views.block_website, name='block_website'),
+  path('unblock-website/<int:website_id>/', views.unblock_website, name='unblock_website'),
+  path('blocked-websites/', views.blocked_websites_list, name='blocked_websites_list'),
+
 ]
 """
 path('timetable/', views.timetable_list, name='timetable-list'),

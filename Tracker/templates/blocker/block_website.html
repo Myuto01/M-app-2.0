@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block Website</title>
+</head>
+<body>
+    <h1>Block Website</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Block</button>
+    </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blocked Websites</title>
+</head>
+<body>
+    <h1>Blocked Websites</h1>
+    <ul>
+        {% for website in blocked_websites %}
+            <li>{{ website.url }} - <a href="{% url 'unblock_website' website.id %}">Unblock</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
